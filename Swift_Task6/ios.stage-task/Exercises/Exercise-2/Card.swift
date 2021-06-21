@@ -8,14 +8,14 @@ protocol CardBaseCompatible: Hashable, Codable {
     func hash(into hasher: inout Hasher)
 }
 
-enum Suit: Int, CaseIterable, Codable {
+enum Suit: Int, CaseIterable, Codable, Equatable {
     case clubs
     case spades
     case hearts
     case diamonds
 }
 
-enum Value: Int, Codable {
+enum Value: Int, CaseIterable, Codable, Equatable {
     case six
     case seven
     case eight
@@ -37,7 +37,7 @@ struct Card: CardBaseCompatible {
     }
 
     static func == (lhs: Self, rhs: Self) -> Bool {
-        return false
+        return lhs.value == rhs.value && lhs.suit == rhs.suit
     }
 }
 
